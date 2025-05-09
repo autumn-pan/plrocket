@@ -1,4 +1,5 @@
 #include "pid.hpp"
+#include <Arduino.h>
 
 PID::PID(float kP, float kI, float kD, float limit)
 {
@@ -10,7 +11,7 @@ PID::PID(float kP, float kI, float kD, float limit)
 
 void PID::calculate(float pos)
 {
-    float currentTime = milis();
+    float currentTime = millis();
     float error = pos - reference;
 
     float delta = currentTime - prevTime;
