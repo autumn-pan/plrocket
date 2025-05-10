@@ -1,18 +1,24 @@
 #include <Arduino.h>
+#include "pins.h"
+#include "rocket/rocket.h"
+#include "subsystems/propulsion.h"
 
-// put function declarations here:
-int myFunction(int, int);
+Rocket * rocket = new Rocket();
+Reigniter * reigniter = new Reigniter(rocket, 3);
 
 void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+  Serial.begin(115200);
+  Serial.println("Hello, world!");
+
+  // outpit pin setup
+  pinMode(3, OUTPUT);
+  reigniter->reignite();
+
+
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  reigniter->update();
 }
 
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
-}
+
