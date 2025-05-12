@@ -83,3 +83,45 @@ void ThrustReverser::update(float angle)
 }
 
 // TVC class
+TVC::TVC(Rocket * rocket, int pinPitch, int pinYaw)
+{
+    // Initialize parent rocket and pins
+    this->rocket = rocket;
+    this->pinPitch = pinPitch;
+    this->pinYaw = pinYaw;
+    // Initialize angles
+    this->pitch = this->servoInitialAngles;
+    this->yaw = this->servoInitialAngles;
+    // Initialize servos
+    this->servoPitch.attach(pinPitch);
+    this->servoYaw.attach(pinYaw);
+    // Correct servo rotation
+    this->servoPitch.write(this->servoInitialAngles);
+    this->servoYaw.write(this->servoInitialAngles);
+}
+
+double TVC::getPitch()
+{
+    return this->pitch;
+}
+
+double TVC::getYaw()
+{
+    return this->yaw;
+}
+
+void TVC::setPitch(double pitch)
+{
+    this->pitch = pitch;
+}
+
+void TVC::setYaw(double yaw)
+{
+    this->yaw = yaw;
+}
+
+void TVC::update()
+{
+    this->servoPitch.write(this->pitch);
+    this->servoYaw.write(this->yaw);
+}

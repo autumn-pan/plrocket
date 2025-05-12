@@ -51,4 +51,37 @@ class ThrustReverser
 };
 
 // TVC Class
+class TVC
+{
+    public:
+        TVC(Rocket * rocket, int pinPitch, int pinYaw);
+
+        double getPitch();
+        double getYaw();
+
+        double setPitch(double pitch);
+        double setYaw(double yaw);
+
+        void update();
+
+    private:
+        Rocket * rocket;
+
+        // TODO: implement max angles (radians or degrees?)
+        // TODO: upload quaternion lib and integrate
+
+        // TODO: change according to CAD
+        double servoInitialAngles = 0;
+
+        // TVC angles
+        double pitch;
+        double yaw;
+        // Teensy pins
+        int pinPitch;
+        int pinYaw;
+        // Servos
+        Servo servoPitch;
+        Servo servoYaw;
+
+};
 #endif
