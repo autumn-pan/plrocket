@@ -3,10 +3,10 @@
 #include "../rocket/rocket.h"
 #include <Servo.h>
 
-class Reigniter
+class Igniter
 {
     public:
-        Reigniter(Rocket * rocket, int pin);
+        Igniter(Rocket * rocket, int pin, unsigned int duration);
         void reignite();
         boolean update();
 
@@ -39,6 +39,8 @@ class ThrustReverser
     private:
         Rocket * rocket;
         unsigned int initialTime;
+    
+
         int pin1;
         int pin2;
         float angle;
@@ -48,4 +50,5 @@ class ThrustReverser
         Servo servo2;
 };
 
+// TVC Class
 #endif
