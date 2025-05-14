@@ -1,5 +1,4 @@
 #include <Arduino.h>
-#include "pins.h"
 #include "rocket/rocket.h"
 #include "subsystems/propulsion.h"
 
