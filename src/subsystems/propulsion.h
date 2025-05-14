@@ -59,8 +59,8 @@ class TVC
         double getPitch();
         double getYaw();
 
-        double setPitch(double pitch);
-        double setYaw(double yaw);
+        void setPitch(double pitch);
+        void setYaw(double yaw);
 
         void update();
 
