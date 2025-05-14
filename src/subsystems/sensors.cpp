@@ -3,7 +3,7 @@
 #include <Adafruit_BNO055.h>
 
 
-IMUHandler::IMUHandler()
+SensorStack::SensorStack()
 {
     Wire.begin();
     Wire1.begin();
@@ -25,7 +25,8 @@ IMUHandler::IMUHandler()
     bno3.setExtCrystalUse(true);
 }
 
-void IMUHandler::update()
+// Update measured sensor values
+void SensorStack::update()
 {
     imu::Vector<3> angVels[3] = {
         bno1.getVector(Adafruit_BNO055::VECTOR_GYROSCOPE),
@@ -53,4 +54,24 @@ void IMUHandler::update()
     }
 
 
+    yAcc[0] = bno1.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
+    yAcc[1] = bno2.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
+    yAcc[2] = bno3.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
+}
+
+double * SensorStack::getPitchVel()
+{
+    return this->pitchVel;
+}
+double * SensorStack::getYawVel()
+{
+    return this->yawVel;
+}
+double * SensorStack::getRollVel()
+{
+    return this->rollVel;
+}
+double * SensorStack::getYAcc()
+{
+    return this->yAcc;
 }
