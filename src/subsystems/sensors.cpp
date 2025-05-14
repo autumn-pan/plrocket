@@ -3,8 +3,10 @@
 #include <Adafruit_BNO055.h>
 
 
-SensorStack::SensorStack()
+SensorStack::SensorStack(double seaLevelPressure)
 {
+    this->seaLevelPressure = seaLevelPressure;
+
     Wire.begin();
     Wire1.begin();
 
@@ -20,6 +22,9 @@ SensorStack::SensorStack()
     if(!bno3.begin())
         Serial.print("BNO055 Unit 3 failed to begin!");
 
+    if(!bmp.begin_I2C()) // Begin Altimeter
+        Serial.print("BMP390 failed to begin!");
+    // Configure altimeter        
     bno1.setExtCrystalUse(true);
     bno2.setExtCrystalUse(true);
     bno3.setExtCrystalUse(true);
@@ -57,6 +62,8 @@ void SensorStack::update()
     yAcc[0] = bno1.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
     yAcc[1] = bno2.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
     yAcc[2] = bno3.getVector(Adafruit_BNO055::VECTOR_ACCELEROMETER).y();
+
+    altitude = bmp.readAltitude(this->seaLevelPressure);
 }
 
 double * SensorStack::getPitchVel()
@@ -74,4 +81,8 @@ double * SensorStack::getRollVel()
 double * SensorStack::getYAcc()
 {
     return this->yAcc;
+}
+double SensorStack::getAltitude()
+{
+    return this->altitude;
 }
