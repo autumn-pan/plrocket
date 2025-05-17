@@ -73,7 +73,7 @@ class TVC
         // TODO: change according to CAD
         double servoInitialAngles = 0;
 
-        // TVC angles
+        // TVC angles`4
         double pitch;
         double yaw;
         // Teensy pins
