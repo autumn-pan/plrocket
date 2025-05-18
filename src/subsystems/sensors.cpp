@@ -93,7 +93,7 @@ double * SensorStack::getYAcc()
 {
     return this->yAcc;
 }
-doubleSensorStack::getAltitude()
+double SensorStack::getAltitude()
 {
     return this->altitude;
 }
