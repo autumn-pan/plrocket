@@ -3,9 +3,8 @@
 #include "../rocket/rocket.h"
 
 // send out a voltage to reignite the rocket thruster
-Igniter::Igniter(Rocket * rocket, int pin, unsigned int duration)
+Igniter::Igniter(int pin, unsigned int duration)
 {
-    this->rocket = rocket;
     this->pin = pin;
     this->state = false;
     this->duration = duration; // 1 second
@@ -42,9 +41,8 @@ boolean Igniter::update()
 
 // Thrust Reverser code
 
-ThrustReverser::ThrustReverser(Rocket * rocket, int pin1, int pin2, float initialAngle)
+ThrustReverser::ThrustReverser(int pin1, int pin2, float initialAngle)
 {
-    this->rocket = rocket;
     this->pin1 = pin1;
     this->pin2 = pin2;
 
@@ -83,10 +81,8 @@ void ThrustReverser::update(float angle)
 }
 
 // TVC class
-TVC::TVC(Rocket * rocket, int pinPitch, int pinYaw)
+TVC::TVC(int pinPitch, int pinYaw)
 {
-    // Initialize parent rocket and pins
-    this->rocket = rocket;
     this->pinPitch = pinPitch;
     this->pinYaw = pinYaw;
     // Initialize angles

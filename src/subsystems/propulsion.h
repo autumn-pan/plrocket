@@ -1,17 +1,15 @@
 #ifndef PROPULSION_H
 #define PROPULSION_H
-#include "../rocket/rocket.h"
 #include <Servo.h>
 
 class Igniter
 {
     public:
-        Igniter(Rocket * rocket, int pin, unsigned int duration);
+        Igniter(int pin, unsigned int duration);
         void reignite();
         boolean update();
 
     private:
-        Rocket * rocket;
         boolean state;
 
         unsigned int initialTime;
@@ -25,7 +23,7 @@ class Igniter
 class ThrustReverser
 {
     public:
-        ThrustReverser(Rocket * rocket, int pin1, int pin2, float initialAngle);
+        ThrustReverser(int pin1, int pin2, float initialAngle);
         // Activates TR
         void initReverse();
         // Update TR angle; to be run every iteration
@@ -37,7 +35,6 @@ class ThrustReverser
         float getAngle(); // Returns TR angle
 
     private:
-        Rocket * rocket;
         unsigned int initialTime;
     
 
@@ -54,7 +51,7 @@ class ThrustReverser
 class TVC
 {
     public:
-        TVC(Rocket * rocket, int pinPitch, int pinYaw);
+        TVC(int pinPitch, int pinYaw);
 
         double getPitch();
         double getYaw();
@@ -65,15 +62,12 @@ class TVC
         void update();
 
     private:
-        Rocket * rocket;
+        // Max Angle: 10 degrees, pi/18 rad
 
-        // TODO: implement max angles (radians or degrees?)
         // TODO: upload quaternion lib and integrate
-
-        // TODO: change according to CAD
         double servoInitialAngles = 0;
 
-        // TVC angles`4
+        // TVC angles
         double pitch;
         double yaw;
         // Teensy pins
