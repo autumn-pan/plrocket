@@ -20,6 +20,7 @@ Rocket::Rocket()
 // Mark the rocket as launched
 void Rocket::launch()
 {
+    Serial.print("Rocket Launched");
     this->state = ASCENT_BURN;
 }
 

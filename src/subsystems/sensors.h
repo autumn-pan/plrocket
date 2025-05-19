@@ -22,14 +22,15 @@ class SensorStack
         Adafruit_BNO055 bno3 = Adafruit_BNO055(2, 0x28, &Wire1);
         Adafruit_BMP3XX bmp;
 
-
-
         double yAcc[3]; //X Acceleration array (3 measured values)
+
         double seaLevelPressure;
         double altitude;
+
         double * rollVel;
         double * pitchVel;
         double * yawVel;
+
         double quat[3][4]; // Orientation quaternion
 };
 
